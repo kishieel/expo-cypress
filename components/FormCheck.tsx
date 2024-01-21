@@ -7,26 +7,35 @@ import { FieldPath } from 'react-hook-form/dist/types';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { Pressable, StyleSheet } from 'react-native';
 
-export function FormCheck<T extends FieldValues>({ name, control, label }: FormInputProps<T>) {
+export function FormCheck<T extends FieldValues>({ testID, name, control, label }: FormInputProps<T>) {
     const { field, fieldState } = useController({ name, control });
     const { error } = fieldState;
 
     return (
-        <View style={styles.formCheckContainer}>
+        <View testID={testID} style={styles.formCheckContainer}>
             <View style={styles.formCheckRow}>
-                <Pressable onPress={() => field.onChange(!field.value)}>
+                <Pressable testID="input" onPress={() => field.onChange(!field.value)}>
                     <View style={[styles.formCheckBox, error ? styles.formCheckInvalid : {}]}>
-                        <Text style={styles.formCheckTic}>{field.value ? '✓' : null}</Text>
+                        <Text testID="checkbox" style={styles.formCheckTic}>
+                            {field.value ? '✓' : null}
+                        </Text>
                     </View>
                 </Pressable>
-                <Text style={styles.formCheckLabel}>{label}</Text>
+                <Text testID="label" style={styles.formCheckLabel}>
+                    {label}
+                </Text>
             </View>
-            {error && <Text style={styles.formCheckError}>{error.message}</Text>}
+            {error && (
+                <Text testID="error" style={styles.formCheckError}>
+                    {error.message}
+                </Text>
+            )}
         </View>
     );
 }
 
 export type FormInputProps<T extends FieldValues> = {
+    testID?: string;
     label: string;
     name: FieldPath<T>;
     control: Control<T>;

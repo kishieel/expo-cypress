@@ -7,26 +7,41 @@ import { FieldPath } from 'react-hook-form/dist/types';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { StyleSheet, TextInput } from 'react-native';
 
-export function FormInput<T extends FieldValues>({ label, name, placeholder, control, secure }: FormInputProps<T>) {
+export function FormInput<T extends FieldValues>({
+    testID,
+    label,
+    name,
+    placeholder,
+    control,
+    secure,
+}: FormInputProps<T>) {
     const { field, fieldState } = useController({ name, control });
     const { error } = fieldState;
 
     return (
-        <View style={styles.formInputContainer}>
-            <Text style={styles.formInputLabel}>{label}</Text>
+        <View testID={testID} style={styles.formInputContainer}>
+            <Text testID={'label'} style={styles.formInputLabel}>
+                {label}
+            </Text>
             <TextInput
+                testID={'input'}
                 style={[styles.formInputText, error ? styles.formInputInvalid : {}]}
                 value={field.value}
                 onChangeText={field.onChange}
                 placeholder={placeholder}
                 secureTextEntry={secure}
             />
-            {error && <Text style={styles.formInputError}>{error.message}</Text>}
+            {error && (
+                <Text testID={'error'} style={styles.formInputError}>
+                    {error.message}
+                </Text>
+            )}
         </View>
     );
 }
 
 export type FormInputProps<T extends FieldValues> = {
+    testID?: string;
     label: string;
     placeholder: string;
     secure?: boolean;

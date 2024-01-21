@@ -22,21 +22,51 @@ export default function SignUpScreen() {
 
     return (
         <ScrollView style={styles.scroll} contentContainerStyle={styles.scrollContainer}>
-            <View style={styles.contentWrapper}>
-                <FormInput label="Nickname" name="nickname" placeholder="Happy Engineer" control={control} />
-                <FormInput label="Email" name="email" placeholder="hello@happy-engineer.tech" control={control} />
-                <FormInput label="Password" name="password" placeholder={'•'.repeat(8)} control={control} secure />
+            <View testID="sign-up-form" style={styles.contentWrapper}>
                 <FormInput
+                    testID="nickname"
+                    label="Nickname"
+                    name="nickname"
+                    placeholder="Happy Engineer"
+                    control={control}
+                />
+                <FormInput
+                    testID="email"
+                    label="Email"
+                    name="email"
+                    placeholder="hello@happy-engineer.tech"
+                    control={control}
+                />
+                <FormInput
+                    testID="password"
+                    label="Password"
+                    name="password"
+                    placeholder={'•'.repeat(8)}
+                    control={control}
+                    secure
+                />
+                <FormInput
+                    testID="confirm"
                     label="Confirm password"
                     name="confirm"
                     placeholder={'•'.repeat(8)}
                     control={control}
                     secure
                 />
-                <FormCheck label="I agree to the terms of use and privacy policy." name="terms" control={control} />
-                <FormCheck label="I agree to receive the newsletter." name="newsletter" control={control} />
+                <FormCheck
+                    testID="terms"
+                    label="I agree to the terms of use and privacy policy."
+                    name="terms"
+                    control={control}
+                />
+                <FormCheck
+                    testID="news"
+                    label="I agree to receive the newsletter."
+                    name="newsletter"
+                    control={control}
+                />
                 <View style={styles.fill} />
-                <Button title="SIGN UP" onPress={handleSubmit(onSubmit)} />
+                <Button testID={'submit'} title="SIGN UP" onPress={handleSubmit(onSubmit)} />
             </View>
         </ScrollView>
     );

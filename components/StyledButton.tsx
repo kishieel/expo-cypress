@@ -4,9 +4,9 @@ import Colors from '@app/constants/Colors';
 import FontFamily from '@app/constants/FontFamily';
 import { StyleSheet, TouchableHighlight } from 'react-native';
 
-export function Button({ title, onPress }: ButtonProps) {
+export function Button({ testID, title, onPress }: ButtonProps) {
     return (
-        <TouchableHighlight style={styles.highlight} onPress={onPress}>
+        <TouchableHighlight testID={testID} style={styles.highlight} onPress={onPress}>
             <View style={styles.button}>
                 <Text style={styles.text}>{title}</Text>
             </View>
@@ -15,6 +15,7 @@ export function Button({ title, onPress }: ButtonProps) {
 }
 
 export type ButtonProps = {
+    testID?: string;
     onPress: () => void;
     title: string;
 };
